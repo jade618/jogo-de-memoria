@@ -1,0 +1,66 @@
+<MemoriaJogo>:
+    canvas.before:
+        Rectangle:
+            pos: self.pos
+            size: self.size
+            source: "imagens/fundo_coracoes.png"
+
+    padding: 20
+    spacing: 10
+#:import FadeTransition kivy.uix.screenmanager.FadeTransition
+#:import Animation kivy.animation.Animation
+
+<StartScreen>:
+    FloatLayout:
+        canvas.before:
+            Color:
+                rgba: 1, 0.8, 0.9, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Label:
+            text: "Jogo da Memória do Amor"
+            font_size: '30sp'
+            pos_hint: {'center_x':0.5, 'center_y':0.7}
+            color: 1, 0, 0.5, 1
+
+        Button:
+            text: "Começar"
+            size_hint: (0.3, 0.1)
+            pos_hint: {'center_x':0.5, 'center_y':0.4}
+            on_release:
+                root.manager.current = 'game'
+
+<GameScreen>:
+    BoxLayout:
+        id: jogo
+        orientation: 'vertical'
+        canvas.before:
+            Color:
+                rgba: 1, 0.9, 0.95, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+<VictoryScreen>:
+    FloatLayout:
+        canvas.before:
+            Color:
+                rgba: 1, 0.8, 0.9, 1
+            Rectangle:
+                pos: self.pos
+                size: self.size
+
+        Image:
+            source: "imagens/vitoria.png"
+            size_hint: (0.8, 0.8)
+            pos_hint: {'center_x': 0.5, 'center_y': 0.6}
+            opacity: 0
+            on_parent: Animation(opacity=1, duration=2).start(self)
+
+        Label:
+            text: "Parabéns, vocês são um par perfeito!"
+            font_size: '24sp'
+            pos_hint: {'center_x':0.5, 'center_y':0.2}
+            color: 1, 0, 0.6, 1
